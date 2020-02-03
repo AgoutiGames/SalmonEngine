@@ -1,0 +1,35 @@
+dist: bionic
+sudo: required
+language: cpp
+compiler: gcc
+env:
+- CONFIG=Release PLATFORM=linux   BIT=64
+- CONFIG=Release PLATFORM=linux   BIT=32
+- CONFIG=Release PLATFORM=windows BIT=64
+- CONFIG=Release PLATFORM=windows BIT=32
+
+- CONFIG=Debug PLATFORM=linux   BIT=64
+- CONFIG=Debug PLATFORM=linux   BIT=32
+- CONFIG=Debug PLATFORM=windows BIT=64
+- CONFIG=Debug PLATFORM=windows BIT=32
+
+install:
+- sudo apt-get update
+- sudo ./scripts/fetch_dev_dependencies.sh
+script:
+- "./scripts/compile.sh"
+before_deploy:
+- "./scripts/pack_artifacts.sh"
+deploy:
+  provider: releases
+  skip_cleanup: true
+  file_glob: true
+  prerelease: true
+  api_key:
+    secure: BlTHPUmhyOK2sMEFSiar0sdj1ucogBpI2MVnvpnctZLldLTL6GWH22xDUd+fJ8oc7kf81UR/DdJIKkDLxRd69H2VzUMN0VBR5T4dWd3NT4ngsz+kCukPAxsjL1l9vh5mRWkvPxqbJI5w7slMhXcDZ9fUy3yA5HHl53+Z2/50fTrA1PTH+teTjqppc5N8KSuT7OYpyycROoKNcwuqsUMiLbkEKsvE5mI899PzN3V9/U4i4iSTxupBrCtVNGlbfFh8fszl0JDDkta+23kZGbhVSAZEq8wuFMZvKzttjLfC+G3BIYLEVTnIeWV22qo5Kr7YjnH9aD0WcyVsm2KWEBppB9DDQ9Ykx5D5ygdW22j0GqdMeccABP3zkDWkL5UNT1s2X7tq9uyHQ8H3IREcSB/p8qEotUpA7c3EBCQYknmb9pH9oyI4c2V6r6VWY4SYMEjm+v39xplklTp8etfsB7Bwa5aNsGKJcshIMu0zN7mjFiiGS+ppxb2o2g66VAtDhRsS/Nd4XqtOIWlCe1o11szm4vhy6nRlPnt4qhR3/rNZXU7OelCEUglqqPQ6t4fdGRRjWXqkDfSn4ELF5kIQ3NytdPGfMntihcLYdOP5l7MV+HCSmWj1FKBvhOi7ysps8Xvx2J4yCD3lvDktZe4ODegQnvX2SWfsSu6eNl18ktZACzQ=
+  file: SalmonEngine*
+  on:
+    tags: true
+    condition: $CONFIG = Release
+    branch: master
+    repo: AgoutiGames/SalmonEngine

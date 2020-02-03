@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="15" height="12" tilewidth="64" tileheight="64" infinite="0" backgroundcolor="#3db827" nextobjectid="4">
+ <properties>
+  <property name="type" value="Menu"/>
+ </properties>
+ <tileset firstgid="1" source="../interface/Buttons.tsx"/>
+ <objectgroup name="Buttons">
+  <object id="2" name="start_button" gid="3" x="398.424" y="304.18" width="128" height="128"/>
+  <object id="3" name="quit_button" gid="1" x="397.576" y="408.09" width="128" height="128"/>
+ </objectgroup>
+ <objectgroup name="Title"/>
+</map>
