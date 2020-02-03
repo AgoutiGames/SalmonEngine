@@ -52,7 +52,7 @@ then
     mkdir libs
     cp build/salmon/libSalmon.so libs/
     cp salmon/LICENSE libs/LICENSE.libSalmon.txt
-    cp LICENSE bin/LICENSE.SalmonEngine.txt 
+    cp LICENSE bin/LICENSE.${PROJECT_NAME}.txt 
     tar cfvz ./${PROJECT_NAME}-${TRAVIS_TAG}-${P}${B}.tar.gz bin libs data -C ./salmon/scripts fetch_dependencies.sh
     rm -r libs
 elif [ "$P" = "windows" ]
@@ -61,7 +61,7 @@ then
     cp ./salmon/dependencies/win${B}/lib/*.txt ./bin
     cp ./build/salmon/libSalmon.dll ./bin
     cp salmon/LICENSE bin/LICENSE.libSalmon.txt
-    cp LICENSE bin/LICENSE.SalmonEngine.txt 
+    cp LICENSE bin/LICENSE.${PROJECT_NAME}.txt 
     zip -r ./${PROJECT_NAME}-${TRAVIS_TAG}-${P}${B}.zip ./bin ./data
 else
     echo "Please define env var \"PLATFORM\" eiter with \"linux\" or \"windows\""
