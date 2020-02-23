@@ -1,14 +1,14 @@
 #ifndef TEMPLATE_HPP_INCLUDED
 #define TEMPLATE_HPP_INCLUDED
 
-#include "core/game_scene.hpp"
+#include "core/game_character.hpp"
 
-class SceneManager;
+class GameScene;
 
-class Template : public GameScene {
+class Template : public GameCharacter {
     public:
-        Template(salmon::MapRef map, SceneManager* scene_manager);
-        Template* create(salmon::MapRef map, SceneManager* scene_manager) const override {return new Template(map,scene_manager);}
+        Template(salmon::ActorRef actor, GameScene* scene);
+        virtual Template* create(salmon::ActorRef actor, GameScene* scene) const override {return new Template(actor,scene);}
 
         void init() override;
         void update() override;
@@ -21,5 +21,6 @@ class Template : public GameScene {
     private:
         static const bool good;
 };
+
 
 #endif // TEMPLATE_HPP_INCLUDED

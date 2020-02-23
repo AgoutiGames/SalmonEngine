@@ -21,6 +21,9 @@ void Menu::init() {
     // Initializes all characters in scene
     GameScene::init();
     // Setup member vars here | example: put(m_speed, "m_speed");
+
+    // Clear data accessed via put
+    get_data().clear();
 }
 
 void Menu::update() {

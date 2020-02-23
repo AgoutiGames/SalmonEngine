@@ -44,10 +44,6 @@ GameCharacter* GameCharacter::parse_character(salmon::ActorRef actor, GameScene*
     }
 }
 
-std::string GameCharacter::type() {
-    return get_data().get_val_string(type_string);
-}
-
 std::map<std::string, GameCharacter*>& GameCharacter::get_dict() {
     static std::map<std::string, GameCharacter*> character_dict;
     return character_dict;

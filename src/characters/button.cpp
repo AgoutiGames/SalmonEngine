@@ -10,6 +10,8 @@ Button::Button(salmon::ActorRef actor, GameScene* scene) : GameCharacter(actor, 
 void Button::init() {
     // Setup member vars here | example: put(m_speed, "m_speed");
     put(m_id, "id");
+    // Clear data accessed via put
+    get_data().clear();
 }
 
 void Button::update() {

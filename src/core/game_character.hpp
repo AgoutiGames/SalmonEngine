@@ -26,7 +26,7 @@ class GameCharacter : public salmon::ActorRef {
         void suspend() {m_suspended = true;}
         void unsuspend() {m_suspended = false;}
 
-        std::string type();
+        std::string virtual get_type() const = 0;
         static const char* type_string;
 
     protected:
