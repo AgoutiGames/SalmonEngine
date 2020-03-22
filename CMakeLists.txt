@@ -46,7 +46,6 @@ if (NOT MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra -Wfatal-errors")
 endif()
 
-set(LIB_TARGET ON CACHE BOOL "Build library version without event support")
 add_subdirectory(salmon)
 
 # Search library in libs folder residing beneath the bin folder
@@ -96,5 +95,3 @@ target_link_libraries(${PROJECT_NAME} PUBLIC Salmon)
 
 set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-# Works only with CMake version 3.13+
-#install(TARGETS Salmon DESTINATION libs)

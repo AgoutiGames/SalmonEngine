@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-usage="Usage: ./build.sh [CONFIG] [PLATFORM] [BIT] [LIBRARY] [VERSION]
+usage="Usage: ./build.sh [CONFIG] [PLATFORM] [BIT] [VERSION]
 CONFIG: \"Release\", \"Debug\", \"Profile\"
 PLATFORM: \"linux\", \"windows\"
 BIT: \"64\", \"32\"
