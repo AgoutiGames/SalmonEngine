@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 usage="Usage: ./pack_artifacts.sh [PLATFORM] [BIT] [VERSION]
-PLATFORM: \"linux\", \"windows\"
+PLATFORM: \"linux\", \"windows\" \"web\"
 BIT: \"64\", \"32\"
 VERSION: any string"
 if [ "$1" ==  "--help" ] || [ "$1" == "-h" ]
@@ -29,7 +29,7 @@ then
     TRAVIS_TAG=$4
 fi
 
-if [ "$P" != "linux" ] && [ "$P" != "windows" ]
+if [ "$P" != "linux" ] && [ "$P" != "windows" ] && [ "$PLATFORM" != "web" ]
 then
     echo "PLATFORM parameter or env var is not properly set! Value is: \"${P}\"!"
     echo "Please check help page via \"./pack_artifacts -h\""
@@ -47,15 +47,16 @@ cd ../
 # Either set project name manually or to directory name
 PROJECT_NAME=${PWD##*/}
 #PROJECT_NAME="Game"
-if [ "$P" = "linux" ]
+if [ "$P" == "linux" ]
 then
     mkdir libs
     cp lib/libSalmon.so libs/
     cp salmon/LICENSE libs/LICENSE.libSalmon.txt
     cp LICENSE bin/LICENSE.${PROJECT_NAME}.txt 
     tar cfvz ./${PROJECT_NAME}-${TRAVIS_TAG}-${P}${B}.tar.gz bin libs data -C ./salmon/scripts fetch_dependencies.sh
+    rm -r bin
     rm -r libs
-elif [ "$P" = "windows" ]
+elif [ "$P" == "windows" ]
 then
     cp ./salmon/dependencies/win${B}/lib/*.dll ./bin
     cp ./salmon/dependencies/win${B}/lib/*.txt ./bin
@@ -63,9 +64,14 @@ then
     cp salmon/LICENSE bin/LICENSE.libSalmon.txt
     cp LICENSE bin/LICENSE.${PROJECT_NAME}.txt 
     zip -r ./${PROJECT_NAME}-${TRAVIS_TAG}-${P}${B}.zip ./bin ./data
+    rm -r bin
+elif [ "$P" == "web" ]
+then
+    cd build
+    tar cfvz ./${PROJECT_NAME}-${TRAVIS_TAG}-${P}.tar.gz *.html *.js *.wasm *.data
+    mv *.tar.gz ../
 else
-    echo "Please define env var \"PLATFORM\" eiter with \"linux\" or \"windows\""
+    echo "Please define env var \"PLATFORM\" eiter with \"linux\", \"windows\" or \"web\""
     exit 1
 fi
-rm -r bin
 echo "Successfully packed artifacts at root level"
