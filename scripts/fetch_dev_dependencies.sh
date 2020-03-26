@@ -58,6 +58,7 @@ then
     exit
 elif [ "$P" == "web" ]
 then
+    cd "$(dirname "${BASH_SOURCE[0]}")"
     ./fetch_emscripten.sh
     ./fetch_emscripten_deps.sh
 else
