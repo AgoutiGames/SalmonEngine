@@ -29,7 +29,7 @@ then
     TRAVIS_TAG=$4
 fi
 
-if [ "$P" != "linux" ] && [ "$P" != "windows" ] && [ "$PLATFORM" != "web" ]
+if [ "$P" != "linux" ] && [ "$P" != "windows" ] && [ "$P" != "web" ]
 then
     echo "PLATFORM parameter or env var is not properly set! Value is: \"${P}\"!"
     echo "Please check help page via \"./pack_artifacts -h\""
