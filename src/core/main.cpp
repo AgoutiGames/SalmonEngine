@@ -9,7 +9,7 @@
 
     int main() {
         game = new SceneManager("scenes/menu.tmx");
-        emscripten_set_main_loop(&one_iteration, 60, 0);
+        emscripten_set_main_loop(&one_iteration, 0, 0);
         return 0;
     }
 
