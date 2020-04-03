@@ -2,6 +2,8 @@
 [Bb]uild/
 [Bb]in/
 [Ll]ib/
+emsdk/
+emscripten_deps/
 
 # Prerequisites
 *.d
