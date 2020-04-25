@@ -68,7 +68,6 @@ then
 elif [ "$P" == "web" ]
 then
     cd build
-    mv *.html index.html
     zip -r ./${PROJECT_NAME}-${TRAVIS_TAG}-${P}.zip *.html *.js *.wasm *.data
     mv *.zip ../
 else

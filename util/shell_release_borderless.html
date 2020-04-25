@@ -39,21 +39,12 @@
       div.emscripten { text-align: center; }
       div.emscripten_border { border: 0px none; }
       /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
-      canvas.emscripten { border: 0px none; background-color: black; }
-      
-      #logo { 
-        width:78px; 
-        height:78px; 
-        float:left; 
-        position:absolute; 
-        margin:1px; 
-        background-image: url('https://files.agouti.games/SALicon_78.png');
-      }
+      canvas.emscripten { border: 0px none; background-color: #abbec1; width: 100%;}
 
       .spinner {
         height: 30px;
         width: 30px;
-        margin: 20px;
+        margin: 0px auto;
         -webkit-animation: rotation .8s linear infinite;
         -moz-animation: rotation .8s linear infinite;
         -o-animation: rotation .8s linear infinite;
@@ -82,24 +73,7 @@
         to {transform: rotate(360deg);}
       }
       
-      .box {
-            align-items: center;
-            justify-content: center;
-            display: flex;
-            width: 100%;
-            height: 80px;
-      }
-      
-      #header { 
-        width: 100%; 
-        height: 80px; 
-        background-color: #63697f; 
-        margin-bottom: 20px;
-        border-bottom: 2px solid #444488;
-      }
-      
       #status {
-        margin: 10px;
         font-weight: bold;
         color: rgb(40, 40, 40);
       }
@@ -107,18 +81,10 @@
     </style>
   </head>
   <body>
-    <div id="header">
-        <a id="logo" href="https://github.com/AgoutiGames/SalmonEngine" target="_blank"></a>
-        <div class="box">
-            <!--<figure style="overflow:visible;" id="spinner"><div class="spinner"></div><center style="margin-top:0.5em"><strong>emscripten</strong></center></figure> -->
-            <div class="spinner" id='spinner'></div>
-            <div>
-                <div id="status">Downloading...</div>
-                <div>
-                  <progress value="0" max="100" id="progress" hidden=1></progress>  
-                </div>
-            </div>
-        </div>
+    <div class="spinner" id='spinner'></div>
+    <div class="emscripten" id="status">Downloading...</div>
+    <div class="emscripten">
+      <progress value="0" max="100" id="progress" hidden=1></progress>  
     </div>
     
     <div class="emscripten_border">

@@ -57,8 +57,23 @@ cd build
 if [ "$P" == "web" ]
 then
     source ../emsdk/emsdk_env.sh
+    
     emcmake cmake -DCMAKE_BUILD_TYPE=${C} ..
     emmake make -j$(nproc)
+    
+    mv *.html firsthtml
+    
+    mv ../util/shell_release.html ../util/_shell_release.html
+    cp ../util/shell_release_borderless.html ../util/shell_release.html
+    
+    emcmake cmake -DCMAKE_BUILD_TYPE=${C} ..
+    emmake make -j$(nproc)
+    
+    rm ../util/shell_release.html
+    mv ../util/_shell_release.html ../util/shell_release.html
+    
+    mv *.html index_borderless.html
+    mv firsthtml index.html
 else
     cmake -DCMAKE_BUILD_TYPE=${C} -DCMAKE_TOOLCHAIN_FILE="../salmon/cmake/${P}${B}-toolchain.cmake" ..
     make -j$(nproc)

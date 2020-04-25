@@ -225,6 +225,18 @@
       document.getElementById('canvas').addEventListener('click', resumeAudio);
       document.addEventListener('keydown', resumeAudio);
     </script>
+        
+    <script type='text/javascript'>
+        // This gives the canvas keyboard focus when clicked (Important when embedded as iframe)
+        // https://supernapie.com/blog/keyboard-focus-in-an-iframe/
+        window.addEventListener('load', function () {
+        window.focus();
+        document.getElementById('canvas').addEventListener('click',function(e) {
+            window.focus();
+        },false);
+    });
+    </script>
+    
     {{{ SCRIPT }}}
   </body>
 </html>
