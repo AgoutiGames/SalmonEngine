@@ -48,3 +48,12 @@ std::map<std::string, GameCharacter*>& GameCharacter::get_dict() {
     static std::map<std::string, GameCharacter*> character_dict;
     return character_dict;
 }
+
+bool GameCharacter::kill() {
+    if(m_dead) {return false;}
+    else {
+        m_dead = true;
+        m_scene->remove_character(this);
+        return true;
+    }
+}

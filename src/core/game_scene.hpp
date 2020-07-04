@@ -54,6 +54,8 @@ class GameScene : public salmon::MapRef {
 
         /// Returns true if the character resides in this scene
         bool is_valid(GameCharacter* character) const;
+        /// Returns true if character is valid and alive
+        bool is_alive(GameCharacter* character) const;
 
         /**
          * @brief Create a GameCharacter from an ActorRef and add to scene

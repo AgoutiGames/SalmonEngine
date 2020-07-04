@@ -42,8 +42,14 @@ class GameCharacter : public salmon::ActorRef {
         bool put(float& var, std::string name);
         bool put(std::string& var, std::string name);
 
+        /// @brief Schedules the character to be removed next frame and sets m_dead to true
+        /// @return true on success, false if already dead
+        bool kill();
+
         /// Return true if currently suspended from updates
         bool suspended() {return m_suspended;}
+        /// Returns true if character is dead -> Is removed from game on next frame
+        bool dead() {return m_dead;}
         /// Suspend character from updating
         void suspend() {m_suspended = true;}
         /// Reenables updating actor per frame
@@ -60,6 +66,7 @@ class GameCharacter : public salmon::ActorRef {
         static bool register_class(std::string type);
     private:
         bool m_suspended = false;
+        bool m_dead = false;
         static std::map<std::string, GameCharacter*>& get_dict();
 };
 

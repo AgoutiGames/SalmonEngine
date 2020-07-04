@@ -167,6 +167,13 @@ bool GameScene::is_valid(GameCharacter* character) const {
     return false;
 }
 
+bool GameScene::is_alive(GameCharacter* character) const {
+    if(is_valid(character)) {
+        return !character->dead();
+    }
+    return false;
+}
+
 GameCharacter* GameScene::get_character_by_name(std::string name) {
     std::vector<GameCharacter*> characters = get_characters_by_name(name);
     if(characters.empty()) {return nullptr;}
