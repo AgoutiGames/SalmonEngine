@@ -66,7 +66,7 @@ endif()
 add_subdirectory(salmon)
 
 # Search library in libs folder residing beneath the bin folder
-set(CMAKE_INSTALL_RPATH "$ORIGIN/../libs")
+set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib")
 
 # Thic can/should get more granular over time
 set(CORE_SOURCES
