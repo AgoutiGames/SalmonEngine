@@ -6,9 +6,9 @@
 #include <memory>
 #include <string>
 
-#include "map_ref.hpp"
-#include "audio_manager_ref.hpp"
-#include "input_cache_ref.hpp"
+#include "mapdata.hpp"
+#include "audio_manager.hpp"
+#include "input_cache.hpp"
 #include "core/game_character.hpp"
 
 class SceneManager;
@@ -25,20 +25,20 @@ class SceneManager;
  * @note Generate a proper child class quick and easy by launching "generate_new_scene.py"
  *       and supplying the name of the class in PascalCase
  */
-class GameScene : public salmon::MapRef {
+class GameScene : public salmon::MapData {
     public:
         friend class SceneManager;
 
-        GameScene(salmon::MapRef map, SceneManager* scene_manager);
+        GameScene(salmon::MapData map, SceneManager* scene_manager);
 
         /**
          * @brief Creates a scene from a MapRef
          * @return a parsed GameScene pointer if there was a GameScene child with a type string
          *         that matched the "type" string property of the map
          */
-        static GameScene* parse_scene(salmon::MapRef map, SceneManager* scene_manager);
+        static GameScene* parse_scene(salmon::MapData map, SceneManager* scene_manager);
         /// Creates GameScene of distinct child type. Needed for constructing by matching type string.
-        virtual GameScene* create(salmon::MapRef map, SceneManager* scene_manager) const = 0;
+        virtual GameScene* create(salmon::MapData map, SceneManager* scene_manager) const = 0;
 
         /// Initializes the scene. Make sure to call this base class init inside of the overriding child init function.
         virtual void init();
@@ -63,7 +63,7 @@ class GameScene : public salmon::MapRef {
          * @return Nullptr if there is no GameCharacter child class whose type string is matching the type property of the actor
          *         otherwise just return the properly parsed GameCharacter pointer
          */
-        GameCharacter* add_character(salmon::ActorRef actor);
+        GameCharacter* add_character(salmon::Actor actor);
 
         /**
          * @brief Create a GameCharacter from an actor template and add to scene
@@ -102,9 +102,9 @@ class GameScene : public salmon::MapRef {
         // Instead of exposing scene manager we forward the only 4 functions safe to call from inside update
 
         /// Returns reference to input cache, holding information about keypresses, mouse state and gamepad state
-        salmon::InputCacheRef get_input_cache();
+        salmon::InputCache get_input_cache();
         /// Return reference to the audio manager object of the game
-        salmon::AudioManagerRef get_audio_manager();
+        salmon::AudioManager get_audio_manager();
         /// Shuts down the game in next frame
         void shutdown_game();
         /**
@@ -221,7 +221,7 @@ T* GameScene::get_character() {
 
 template <class T>
 bool GameScene::register_class(std::string type) {
-    MapRef dummy(nullptr);
+    MapData dummy(nullptr);
     GameScene* scene = new T(dummy,nullptr);
     get_dict()[type] = scene;
     return true;
@@ -232,11 +232,11 @@ GameCharacter* GameScene::add_character(T* character, std::string layer_name, st
     // Duplicate the derived character type | Both reference the same actor
     T* new_char = new T(*character);
     // Duplicate the actor
-    salmon::ActorRef actor = add_actor(*static_cast<salmon::ActorRef*>(character),layer_name,actor_name);
+    salmon::Actor actor = add_actor(*static_cast<salmon::Actor*>(character),layer_name,actor_name);
     if(!actor.good()) {return nullptr;}
     else {
         // Assign the actor to the new character
-        *static_cast<salmon::ActorRef*>(new_char) = actor;
+        *static_cast<salmon::Actor*>(new_char) = actor;
         m_add_characters.push_back(new_char);
         return m_add_characters.back();
     }

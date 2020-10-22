@@ -3,7 +3,7 @@
 const char* Template::type = "Template";
 const bool Template::good = GameScene::register_class<Template>(Template::type);
 
-Template::Template(salmon::MapRef map, SceneManager* scene_manager) :
+Template::Template(salmon::MapData map, SceneManager* scene_manager) :
     GameScene(map,scene_manager) {}
 
 void Template::init() {

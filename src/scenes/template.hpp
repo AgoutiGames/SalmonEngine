@@ -7,8 +7,8 @@ class SceneManager;
 
 class Template : public GameScene {
     public:
-        Template(salmon::MapRef map, SceneManager* scene_manager);
-        Template* create(salmon::MapRef map, SceneManager* scene_manager) const override {return new Template(map,scene_manager);}
+        Template(salmon::MapData map, SceneManager* scene_manager);
+        Template* create(salmon::MapData map, SceneManager* scene_manager) const override {return new Template(map,scene_manager);}
 
         void init() override;
         void update() override;

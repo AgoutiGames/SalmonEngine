@@ -9,8 +9,8 @@ class SceneManager;
 
 class Menu : public GameScene {
     public:
-        Menu(salmon::MapRef map, SceneManager* scene_manager);
-        Menu* create(salmon::MapRef map, SceneManager* scene_manager) const override {return new Menu(map,scene_manager);}
+        Menu(salmon::MapData map, SceneManager* scene_manager);
+        Menu* create(salmon::MapData map, SceneManager* scene_manager) const override {return new Menu(map,scene_manager);}
 
         void init() override;
         void update() override;

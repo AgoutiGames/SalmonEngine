@@ -7,8 +7,8 @@ class GameScene;
 
 class Template : public GameCharacter {
     public:
-        Template(salmon::ActorRef actor, GameScene* scene);
-        virtual Template* create(salmon::ActorRef actor, GameScene* scene) const override {return new Template(actor,scene);}
+        Template(salmon::Actor actor, GameScene* scene);
+        virtual Template* create(salmon::Actor actor, GameScene* scene) const override {return new Template(actor,scene);}
 
         void init() override;
         void update() override;

@@ -7,7 +7,7 @@
 const char* Menu::type = "Menu";
 const bool Menu::good = GameScene::register_class<Menu>(Menu::type);
 
-Menu::Menu(salmon::MapRef map, SceneManager* scene_manager) :
+Menu::Menu(salmon::MapData map, SceneManager* scene_manager) :
     GameScene(map,scene_manager) {}
 
 void Menu::init() {
@@ -28,7 +28,7 @@ void Menu::init() {
 
 void Menu::update() {
     // Add scene logic here
-    salmon::InputCacheRef input = get_input_cache();
+    salmon::InputCache input = get_input_cache();
     if(input.just_pressed("Escape")) {
         m_scene_manager->shutdown();
     }

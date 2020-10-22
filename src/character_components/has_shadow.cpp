@@ -18,13 +18,14 @@ bool HasShadow::init_shadow(std::string character_template_name, std::string lay
 }
 void HasShadow::update_shadow() {
     m_shadow->set_animation(get_animation(),get_direction(),get_current_anim_frame());
-    m_shadow->move_absolute(get_x()+m_x_offset,get_y()+m_y_offset);
+    auto p = get_transform().get_relative(0,0);
+    m_shadow->move_absolute(p.x+m_x_offset,p.y+m_y_offset);
 }
 GameCharacter* HasShadow::get_shadow() {
     return m_shadow;
 }
 void HasShadow::tweak_shadow_position() {
-    salmon::InputCacheRef input = m_scene->get_input_cache();
+    salmon::InputCache input = m_scene->get_input_cache();
     if(input.just_pressed("Up")) {
         m_y_offset--;
     }

@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-#include "actor_ref.hpp"
+#include "actor.hpp"
 
 class GameScene;
 
@@ -17,19 +17,19 @@ class GameScene;
  * @note Generate a proper child class quick and easy by launching "generate_new_character.py"
  *       and supplying the name of the class in PascalCase
  */
-class GameCharacter : public salmon::ActorRef {
+class GameCharacter : public salmon::Actor {
     public:
-        GameCharacter(salmon::ActorRef actor, GameScene* scene);
+        GameCharacter(salmon::Actor actor, GameScene* scene);
 
         /**
          * @brief Creates a GameCharacter from an ActorRef
          * @return a parsed GameCharacter pointer if there was a child class with a type string
          *         that matched the "type" string property of the ActorRef
          */
-        static GameCharacter* parse_character(salmon::ActorRef actor, GameScene* scene);
+        static GameCharacter* parse_character(salmon::Actor actor, GameScene* scene);
 
         /// Creates GameCharacter of distinct child type. Needed for constructing by matching type string.
-        virtual GameCharacter* create(salmon::ActorRef actor, GameScene* scene) const = 0;
+        virtual GameCharacter* create(salmon::Actor actor, GameScene* scene) const = 0;
 
         /// Initializes the character. Add your custom initialization stuff here.
         virtual void init() = 0;
@@ -72,7 +72,7 @@ class GameCharacter : public salmon::ActorRef {
 
 template <class T>
 bool GameCharacter::register_class(std::string type) {
-    ActorRef dummy(nullptr);
+    Actor dummy(nullptr);
     GameCharacter* character = new T(dummy,nullptr);
     get_dict()[type] = character;
     return true;

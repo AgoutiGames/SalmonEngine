@@ -5,7 +5,7 @@
 const char* Button::type = "Button";
 const bool Button::good = GameCharacter::register_class<Button>(Button::type);
 
-Button::Button(salmon::ActorRef actor, GameScene* scene) : GameCharacter(actor, scene) {}
+Button::Button(salmon::Actor actor, GameScene* scene) : GameCharacter(actor, scene) {}
 
 void Button::init() {
     // Setup member vars here | example: put(m_speed, "m_speed");
@@ -19,10 +19,10 @@ void Button::update() {
 
     set_animation(salmon::AnimationType::current, salmon::Direction::current,0);
 
-    for(salmon::CollisionRef& c : get_collisions()) {
+    for(salmon::Collision& c : get_collisions()) {
         if(c.mouse()) {
             set_animation(salmon::AnimationType::current, salmon::Direction::current,1);
-            salmon::InputCacheRef input = m_scene->get_input_cache();
+            salmon::InputCache input = m_scene->get_input_cache();
             salmon::MouseState mouse = input.get_mouse_state();
             if(mouse.left.pressed) {
                 static_cast<Menu*>(m_scene)->button_pressed(m_id);
