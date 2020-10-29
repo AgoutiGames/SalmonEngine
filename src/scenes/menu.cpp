@@ -11,9 +11,9 @@ Menu::Menu(salmon::MapData map, SceneManager* scene_manager) :
     GameScene(map,scene_manager) {}
 
 void Menu::init() {
-    m_scene_manager->set_game_resolution(960,720);
-    m_scene_manager->set_fullscreen(false);
-    m_scene_manager->set_window_size(960,720);
+    get_camera().get_transform().set_dimensions(960,720);
+    m_scene_manager->get_window().set_fullscreen(false);
+    m_scene_manager->get_window().get_transform().set_dimensions(960,720);
 
     // Preload whole data folder
     m_scene_manager->add_preload_directory("");
