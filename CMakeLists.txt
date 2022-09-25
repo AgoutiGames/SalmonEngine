@@ -51,14 +51,16 @@ if(CMAKE_SYSTEM_NAME STREQUAL Emscripten)
     list(APPEND CMAKE_FIND_ROOT_PATH "${PROJECT_SOURCE_DIR}/emscripten_deps")
     list(APPEND CMAKE_SYSTEM_INCLUDE_PATH "${PROJECT_SOURCE_DIR}/emscripten_deps/include")
     list(APPEND CMAKE_SYSTEM_LIBRARY_PATH "${PROJECT_SOURCE_DIR}/emscripten_deps/lib")
-
+    
     # Use all relevant emscripten ports
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[''png'',''bmp'',''jpg'']' -s USE_SDL_MIXER=2 -s USE_SDL_TTF=2 -s USE_LIBJPEG=1 -s USE_LIBPNG=1 -s USE_OGG=1 -s USE_VORBIS=1 -s USE_FREETYPE=1 -s USE_ZLIB=1 -DBUFFERSIZE=4096 -s ALLOW_MEMORY_GROWTH=1 --no-heap-copy -s EXIT_RUNTIME=1")
-
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[''png'',''bmp'',''jpg'']' -s USE_SDL_MIXER=2 -s USE_SDL_TTF=2 -s USE_LIBJPEG=1 -s USE_LIBPNG=1 -s USE_OGG=1 -s USE_VORBIS=1 -s USE_FREETYPE=1 -s USE_ZLIB=1 -DBUFFERSIZE=4096 --no-heap-copy")
+    
     # Make console logs in browser more useful
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g4 -s ASSERTIONS=2 -s SAFE_HEAP=1 -s STACK_OVERFLOW_CHECK=2 --source-map-base http://localhost:8080/ --shell-file ../util/shell_debug.html")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} --shell-file ../util/shell_release.html")
-
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -gsource-map")
+    
+    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -s ASSERTIONS=2 -s SAFE_HEAP=1 -s STACK_OVERFLOW_CHECK=2 --source-map-base http://localhost:8080/ --shell-file ${PROJECT_SOURCE_DIR}/util/shell_debug.html")
+    set(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} --shell-file ${PROJECT_SOURCE_DIR}/util/shell_release.html")
+    
     # Generate with complete default html
     SET(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif()
@@ -113,7 +115,7 @@ endif()
 add_executable(${PROJECT_NAME} ${GAME_SOURCES})
 
 if(CMAKE_SYSTEM_NAME STREQUAL Emscripten)
-    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "--preload-file ${CMAKE_SOURCE_DIR}/data@/data/")
+    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-s ALLOW_MEMORY_GROWTH=1 -s EXIT_RUNTIME=1 --preload-file ${CMAKE_SOURCE_DIR}/data@/data/")
 endif()
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
