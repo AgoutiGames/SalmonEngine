@@ -1,4 +1,4 @@
-# SalmonEngine
+# SalmonEngine [![Build Status](https://app.travis-ci.com/AgoutiGames/SalmonEngine.svg?branch=master)](https://app.travis-ci.com/AgoutiGames/SalmonEngine)
 This template project is a wrapper for the [RawSalmonEngine](https://github.com/AgoutiGames/RawSalmonEngine) dedicated as a starting point for developing games with it and making it as user friendly as possible.
 ## Dependencies
 * **[RawSalmonEngine](https://github.com/AgoutiGames/RawSalmonEngine)**
